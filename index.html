@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Username Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-500">
+    <div class="bg-white p-9 rounded shadow-md w-full max-w-sm">
+        <h1 class="text-2xl font-semibold mb-4">Chek Username - Game<br>Created By <a href="https://instagram.com/claymore.store__" target="_blank" class="text-blue-600 visited:text-purple-600">@derispewsss</a></h1>
+        <p class="text-left text-red-600 mb-2">Pilih Game yang kamu inginkan.</p>
+        <div class="relative inline-flex">
+        <select id="pageDropdown" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+            <option value="">Pilih Game</option>
+            <option value="/mobile-legends">Mobile Legends</option>
+            <option value="/free-fire">Free Fire</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 10l5 5 5-5z" /></svg>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        const pageDropdown = document.getElementById("pageDropdown");
+        const cardContainer = document.getElementById("cardContainer");
+
+        pageDropdown.addEventListener("change", function () {
+            const selectedPage = pageDropdown.value;
+            if (selectedPage) {
+                window.location.href = selectedPage;
+            }
+        });
+    </script>
+</body>
+</html>

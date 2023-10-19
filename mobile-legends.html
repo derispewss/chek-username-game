@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+    <title>Chek Username - Mobile Legends</title>
+</head>
+<body class="bg-gray-500 flex justify-center items-center h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-sm">
+    <h1 class="text-2xl font-semibold mb-4">Chek Username - <br>Mobile Legends Bang : Bang</h1>
+    <p class="text-left text-red-600 mb-2">Mohon isi data dengan benar.</p>
+    <form id="myForm">
+        <div class="mb-4">
+            <label for="uid" class="block font-medium mb-2">UID</label>
+            <input type="number" id="uid" placeholder="enter your uid" name="uid" class="w-full border rounded px-3 py-2" required>
+        </div>
+        <div class="mb-4">
+            <label for="server" class="block font-medium mb-2">Server</label>
+            <input type="number" id="server" placeholder="enter your server" name="server" class="w-full border rounded px-3 py-2" required>
+        </div>
+        <button type="submit" id="loginButton" class="w-full bg-green-700 text-white font-medium py-2 rounded hover:bg-green-800">Chek Username</button>
+        <div class="mt-4 text-center">
+        <a href="/index" class="text-gray-600 hover:underline flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back
+        </a>
+        </div>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <script>
+        document.getElementById("loginButton").addEventListener("click", function(event) {
+            event.preventDefault();
+
+            let uid = document.getElementById('uid').value;
+            let server = document.getElementById('server').value
+            let apikey = 'derisganteng'
+
+            if (uid === '' && server === '') {
+                iziToast.warning({
+                    title: 'Warning',
+                    message: 'Mohon Isi data game anda terlebih dahulu.',
+                    position: 'topRight',
+                });
+            }
+            
+            let url = `https://api.lolhuman.xyz/api/mobilelegend/${uid}/${server}?apikey=${apikey}`
+
+            fetch(url)
+            .then(response => response.json())
+            .then(data => {
+            let result = data
+            console.log(result)
+            if (result.status === 200 && result.message === "success") {
+                    if ("result" in result) {
+                        // Respons sukses dengan hasil
+                        iziToast.success({
+                            title: 'Username :',
+                            message: result.result,
+                            position: 'topRight',
+                        });
+                    } else {
+                        // Respons sukses tanpa hasil
+                        alert("uid/server salah , mohon ulangi lagi")
+                    }
+                }
+            })
+            .catch(error => {
+                alert(error);
+            });
+
+            document.getElementById("myForm").reset();
+        })
+    </script>
+</div>
+</body>
+</html>
